@@ -481,7 +481,9 @@ namespace Kirurobo
             // 自ウィンドウ取得ができていなければ、取得
             if (_uniWinCore == null || !_uniWinCore.IsActive)
             {
+                #if !UNITY_EDITOR
                 UpdateTargetWindow();
+                #endif
             } else
             {
                 _uniWinCore.Update();
@@ -793,7 +795,7 @@ namespace Kirurobo
             }
             else
             {
-                #if UNITY_EDITOR
+                #if !UNITY_EDITOR
                 // エディタではゲームビューが閉じられたりドッキングされたりするため、変化していれば対象ウィンドウを変更
                 // アクティブウィンドウが現在の対象と同じならばなにもおこらない
                 _uniWinCore.AttachMyActiveWindow();
@@ -809,7 +811,9 @@ namespace Kirurobo
         {
             if (focus)
             {
+                #if !UNITY_EDITOR
                 UpdateTargetWindow();
+                #endif
 
                 // フォーカスが当たった瞬間には、強制的にクリックスルーはオフにする
                 if (_isTransparent && isHitTestEnabled && transparentType != TransparentType.ColorKey)
